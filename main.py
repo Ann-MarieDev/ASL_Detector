@@ -13,7 +13,7 @@ from mediapipe.tasks.python import vision
 mediapipe_hands = mp.solutions.hands
 
 # Settings 4 media pipe and hand tracking !!!!!!!!! 😒 this is so confusing 
-hands = mp_hands.Hands(
+hands = mediapipe_hands.Hands(
     static_image_mode=False,    # False means we're working with video, not "static" images
     max_num_hands=2,            # Detect up to 2 hands in the frame
     min_detection_confidence=0.7,# How sure MediaPipe needs to be that it sees a hand (70%)
@@ -35,8 +35,19 @@ while True:
     
     #Tells me if it could not read the webcam/it failed
     if not isTrue:
-        print("Could not read frame")
+        print("Could not read frame in video/webcam")
         break
+    
+    # For some reason mediapipe needs rgb? So this is converting the frames to rgb (open cv uses bgr but mediapipe uses rgb.. bruhh what)
+    # cvtColor changes the img color in opencv & COLOR_BGR2RGB converts it from blue green red to red green blue
+    frame_color_converter = cv.cvtColor(frame, cv.color_bgr2rgb)
+    
+    #Dectect hands 
+    hand_results = hands.process(frame_color_converter)
+    
+    #If statement: If it sees hands it will show points on the hand (knuckles, wrist, etc)
+    if hand_landmarks in hand_results.multi_hand_landmarks:
+        mediapipe_draw.draw_landmarks(frame, hand_landmarks, mediapipe_hands.HAND_CONNECTIONS, mediapipe_points.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2), mediapipe_points.DrawingSpec(color=(0, 0, 225), thickness=2))
     
     #Displays current frame in a window: Webcam-name of the window
     #"imshow is used to create a graphical window and update it with the current frame" whateva that means
