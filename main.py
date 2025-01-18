@@ -10,17 +10,18 @@ import cv2 as cv
 from mediapipe.tasks.python import vision 
 #------------------------------------Mediapipe setup------------------------------------
 #Variable that acesses mediaspipes stuff
-mp_hands = mp.solutions.hands
+mediapipe_hands = mp.solutions.hands
 
-# Settings!!!!!!!!! 😒 this is so confusing 
+# Settings 4 media pipe and hand tracking !!!!!!!!! 😒 this is so confusing 
 hands = mp_hands.Hands(
-    static_image_mode=False,    # False means we're working with video, not static images
+    static_image_mode=False,    # False means we're working with video, not "static" images
     max_num_hands=2,            # Detect up to 2 hands in the frame
     min_detection_confidence=0.7,# How sure MediaPipe needs to be that it sees a hand (70%)
     min_tracking_confidence=0.5  # How sure it needs to be to keep tracking a hand (50%)
 )
 
-
+#Variable so we can see the hand points (knuckles, wrist, etc etc)
+mediapipe_points = mp.solutions.drawing_utils
 
 #------------------------------------Acssesing the camera------------------------------------
 #Opens the webcam: This makes a object "capture" that lets you control and retrieve frames from the webcam
@@ -41,13 +42,13 @@ while True:
     #"imshow is used to create a graphical window and update it with the current frame" whateva that means
     cv.imshow('Webcam', frame)
     
-    # Save the current frame as an image by overwriting the same file--no extra memory usage 😛...wtf the emoji sideways
+    # Save the current frame as an image by overwriting the same file--no extra memory usage 😛... y the emoji sideways
     cv.imwrite('current_frame.jpg', frame)
     
     #cv2.waitKey(1) waits for 1 millisecond for a key press; 
     #& 0xFF compatibility from systems when interpreting key presses;
     #ord('q') is the ascii value of the letter 'q' if you press q the loop breaks
-    if cv.waitKey(1) & 0xFF == ord('q'):
+    if cv.waitKey(1) & 0xFF == ord('q'): # q for quit
         break
 #------------------------------------Clean-up------------------------------------
 #Stops the webcam from being used by program (releases the webcam hint hint)
