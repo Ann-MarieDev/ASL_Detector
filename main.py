@@ -40,14 +40,16 @@ while True:
     
     # For some reason mediapipe needs rgb? So this is converting the frames to rgb (open cv uses bgr but mediapipe uses rgb.. bruhh what)
     # cvtColor changes the img color in opencv & COLOR_BGR2RGB converts it from blue green red to red green blue
-    frame_color_converter = cv.cvtColor(frame, cv.color_bgr2rgb)
+    frame_color_converter = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
     
     #Dectect hands 
     hand_results = hands.process(frame_color_converter)
     
     #If statement: If it sees hands it will show points on the hand (knuckles, wrist, etc)
-    if hand_landmarks in hand_results.multi_hand_landmarks:
-        mediapipe_draw.draw_landmarks(frame, hand_landmarks, mediapipe_hands.HAND_CONNECTIONS, mediapipe_points.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2), mediapipe_points.DrawingSpec(color=(0, 0, 225), thickness=2))
+    
+    if hand_results.multi_hand_landmarks:
+        for hand_landmarks in hand_results.multi_hand_landmarks:
+            mediapipe_points.draw_landmarks(frame, hand_landmarks, mediapipe_hands.HAND_CONNECTIONS, mediapipe_points.DrawingSpec(color=(199,21,133), thickness=2, circle_radius=2), mediapipe_points.DrawingSpec(color=(195, 177, 225), thickness=2))
     
     #Displays current frame in a window: Webcam-name of the window
     #"imshow is used to create a graphical window and update it with the current frame" whateva that means
