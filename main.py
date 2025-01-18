@@ -12,8 +12,8 @@ from mediapipe.tasks.python import vision
 #Import functions/unit tests/logging stuff if broken
 
 #Import asl signs data to translate signs
-import asl_signs as hand_data
-
+#import asl_signs as hand_data
+from utils import asl_signs
 
 #------------------------------------Mediapipe setup------------------------------------
 #Variable that acesses mediaspipes stuff
@@ -29,6 +29,7 @@ hands = mediapipe_hands.Hands(
 
 #Variable so we can see the hand points (knuckles, wrist, etc etc)
 mediapipe_points = mp.solutions.drawing_utils
+
 
 #------------------------------------Acssesing the camera------------------------------------
 #Opens the webcam: This makes a object "capture" that lets you control and retrieve frames from the webcam
@@ -57,7 +58,7 @@ while True:
     if hand_results.multi_hand_landmarks:
         for hand_landmarks in hand_results.multi_hand_landmarks:
             mediapipe_points.draw_landmarks(frame, hand_landmarks, mediapipe_hands.HAND_CONNECTIONS, mediapipe_points.DrawingSpec(color=(199,21,133), thickness=2, circle_radius=2), mediapipe_points.DrawingSpec(color=(195, 177, 225), thickness=2))
-    
+
     #Displays current frame in a window: Webcam-name of the window
     #"imshow is used to create a graphical window and update it with the current frame" whateva that means
     cv.imshow('Webcam', frame)
