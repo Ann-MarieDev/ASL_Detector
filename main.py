@@ -21,10 +21,10 @@ mediapipe_hands = mp.solutions.hands
 
 # Settings 4 media pipe and hand tracking !!!!!!!!! 😒 this is so confusing 
 hands = mediapipe_hands.Hands(
-    static_image_mode=False,    # False means we're working with video, not "static" images
-    max_num_hands=2,            # Detect up to 2 hands in the frame
-    min_detection_confidence=0.7,# How sure MediaPipe needs to be that it sees a hand (70%)
-    min_tracking_confidence=0.5  # How sure it needs to be to keep tracking a hand (50%)
+    static_image_mode = False,    # False means we're working with video, not "static" images
+    max_num_hands = 2,            # Detect up to 2 hands in the frame
+    min_detection_confidence = 0.4,# How sure MediaPipe needs to be that it sees a hand (70%)
+    min_tracking_confidence = 0.2  # How sure it needs to be to keep tracking a hand (50%)
 )
 
 #Variable so we can see the hand points (knuckles, wrist, etc etc)
