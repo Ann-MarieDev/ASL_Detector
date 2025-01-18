@@ -8,6 +8,13 @@ import cv2 as cv
 
 #Import the vision tasks: Aka video and image input
 from mediapipe.tasks.python import vision 
+
+#Import functions/unit tests/logging stuff if broken
+
+#Import asl signs data to translate signs
+import asl_signs as hand_data
+
+
 #------------------------------------Mediapipe setup------------------------------------
 #Variable that acesses mediaspipes stuff
 mediapipe_hands = mp.solutions.hands
