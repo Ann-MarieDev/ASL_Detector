@@ -14,7 +14,7 @@ This project is developed as part of a scholarship submission for the Hoover Fou
 ## Future Development  
 Planned improvements include expanding the ASL vocabulary coverage, enhancing gesture recognition accuracy, and optimizing real-time performance. The long-term vision is to integrate this technology into mobile and web applications to reach a broader audience.  
 
-### Thank you!
+Thank you!
 
 ## Updates & Patch Notes  
 This section will track improvements, fixes, and new features added to the project over time.  
